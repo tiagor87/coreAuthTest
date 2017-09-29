@@ -38,5 +38,12 @@ namespace api.Controllers
                 return Forbid();
             }
         }
+
+        [HttpGet]
+        [Authorize(Policy = "RequireBothRolesTest")]
+        public IActionResult Teste()
+        {
+            return Ok();
+        }
     }
 }

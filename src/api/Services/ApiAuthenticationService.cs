@@ -31,7 +31,7 @@ namespace api.Services
                     Id = 2,
                     Login = "User",
                     Email = "user@user.com",
-                    Roles = { "User", "UserViewer", "AccountCreator" }
+                    Roles = { "User", "UserViewer", "AccountCreator", "role1", "role2" }
                 };
             }
             else

@@ -54,12 +54,11 @@ namespace api
             });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("UserManagement", policy => policy.AddRequirements(new PermissionRequirement("UserCreator", "UserViewer")));
-                options.AddPolicy("AccountManagement", policy => policy.AddRequirements(new PermissionRequirement("AccountCreator", "AccountViewer")));
-                options.AddPolicy("DeleteAccount", policy => policy.Requirements.Add(new AccountOwnerRequirement()));
+                options.AddPolicy("UserManagement", policy => policy.RequireRoleWithAdmin("UserCreator", "UserViewer"));
+                options.AddPolicy("AccountManagement", policy => policy.RequireRoleWithAdmin("AccountCreator", "AccountViewer"));
+                options.AddPolicy("DeleteAccount", policy => policy.AddRequirements(new AccountOwnerRequirement()));
+                options.AddPolicy("RequireBothRolesTest", policy => policy.RequireAllRolesWithAdmin("role1", "role2"));
             });
-
-            //services.AddScoped<IAuthorizationHandler, AccountOwnerRequirement>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

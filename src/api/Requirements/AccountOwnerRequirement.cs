@@ -11,7 +11,7 @@ namespace api.Requirements
         {
         }
 
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AccountOwnerRequirement requirement, Account resource)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AccountOwnerRequirement requirement, Account account)
         {
             if (context.User == null)
             {
@@ -19,7 +19,7 @@ namespace api.Requirements
                 return Task.CompletedTask;
             }
 
-            if (context.User.IsInRole("Admin") || resource.Owner.Equals(context.User.Identity.Name))
+            if (context.User.IsInRole("Admin") || account.Owner.Equals(context.User.Identity.Name))
             {
                 context.Succeed(requirement);
                 return Task.CompletedTask;
