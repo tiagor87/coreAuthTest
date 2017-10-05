@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using api.Requirements;
 using domain;
@@ -59,6 +61,7 @@ namespace api
                 options.AddPolicy("DeleteAccount", policy => policy.AddRequirements(new AccountOwnerRequirement()));
                 options.AddPolicy("RequireBothRolesTest", policy => policy.RequireAllRolesWithAdmin("role1", "role2"));
             });
+            services.AddTransient<ILoadUserRolesCommand, LoadUserRolesCommand>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +79,8 @@ namespace api
                              .AllowCredentials());
 
             app.UseAuthentication();
+
+            app.UseMiddleware<LoadAuthorizationMiddleware>();
 
             app.UseMvc();
         }

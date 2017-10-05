@@ -19,7 +19,13 @@ namespace api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok();
+            return Ok(new[] {
+                new {
+                    Id = 1,
+                    Name = "Teste",
+                    Email = "tiagor87@gmail.com"
+                }
+            });
         }
     }
 }

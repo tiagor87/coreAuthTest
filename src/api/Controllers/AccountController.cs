@@ -40,7 +40,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "RequireBothRolesTest")]
+        [Authorize(Policy = "RequireBothRolesTest", Roles = "Teste")]
         public IActionResult Teste()
         {
             return Ok();
